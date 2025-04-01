@@ -8,10 +8,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class TP2App extends Application {
 
@@ -43,7 +45,14 @@ public class TP2App extends Application {
   /** Prépare la fenêtre pour demander confirmation avant fermeture */
   private void prepareFermeture(Stage stage) {
     stage.setOnCloseRequest(event -> {
-      //TODO confirmer ou consommer l'événement
+      Alert alert = new Alert(AlertType.CONFIRMATION);
+      alert.setHeaderText("Voulez vous vraiment quitter ?");
+      alert.getButtonTypes().setAll(ButtonType.NO, ButtonType.YES);
+      Optional<ButtonType> res = alert.showAndWait();
+      
+      if (res.orElse(ButtonType.NO) != ButtonType.YES) {
+    	  event.consume();
+      }
     });
   }
 
