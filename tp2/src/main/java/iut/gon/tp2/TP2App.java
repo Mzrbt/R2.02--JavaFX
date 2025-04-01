@@ -51,7 +51,32 @@ public class TP2App extends Application {
   private void prepareBoutons() {
     ajouteTout.setOnAction(this::onAjouteTout);
     retireTout.setOnAction(this::onRetireTout);
-    // TODO actions des deux boutons centraux
+    
+    versGauche.setOnAction(event -> {
+    	int index = droite.getSelectionModel().getSelectedIndex();
+    	if(!(index == -1)) {
+    		String Personne = droite.getItems().remove(index);
+    		gauche.getItems().add(Personne);
+    		droite.getSelectionModel().clearSelection(index);
+    	}
+    	
+    	if (droite.getSelectionModel().isEmpty()) {
+    		versGauche.setDisable(true);
+    	}
+    });
+    
+    versDroite.setOnAction(event -> {
+    	int index = gauche.getSelectionModel().getSelectedIndex();
+    	if(!(index == -1)) {
+    		String Personne = gauche.getItems().remove(index);
+    		droite.getItems().add(Personne);
+    		gauche.getSelectionModel().clearSelection(index);
+    	}
+    	
+    	if (gauche.getSelectionModel().isEmpty()) {
+    		versDroite.setDisable(true);
+    	}
+    });
   }
 
   /** Ajoute tous les éléments de gauche dans la liste de droite
@@ -59,13 +84,19 @@ public class TP2App extends Application {
   private void onAjouteTout(ActionEvent actionEvent) {
     droite.getItems().addAll(gauche.getItems());
     gauche.getItems().clear();
-    //TODO active/désactive les boutons
+    
+    ajouteTout.setDisable(true);
+    retireTout.setDisable(droite.getItems().isEmpty());
   }
 
   /** Ajoute tous les éléments de droite dans la liste de gauche
    Active le bouton "Ajouter tout" et désactive le bouton "Retirer tout" */
   private void onRetireTout(ActionEvent actionEvent) {
-    //TODO
+	  gauche.getItems().addAll(droite.getItems());
+	  droite.getItems().clear();
+	  
+	  retireTout.setDisable(true);
+	  ajouteTout.setDisable(gauche.getItems().isEmpty());
   }
 
   /** Prépare les menus et leurs événements */
@@ -97,7 +128,11 @@ public class TP2App extends Application {
    Active le bouton "Ajouter tout"
    */
   private void prepareListe() {
-    //TODO active le bouton "Ajouter tout"
+	  gauche.getItems().add("Eleve 1");
+	  gauche.getItems().add("Eleve 2");
+	  gauche.getItems().add("Eleve 3");
+	  
+	  ajouteTout.setDisable(false);
   }
 
   private void extraitIds(Scene scene) {
