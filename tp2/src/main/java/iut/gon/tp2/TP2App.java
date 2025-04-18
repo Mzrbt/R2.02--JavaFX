@@ -69,8 +69,12 @@ public class TP2App extends Application {
     		droite.getSelectionModel().clearSelection(index);
     	}
     	
-    	if (droite.getSelectionModel().isEmpty()) {
+    	if (droite.getItems().size() == 0) {
     		versGauche.setDisable(true);
+    	}
+    	
+    	if (gauche.getItems().size() > 0) {
+    		ajouteTout.setDisable(false);
     	}
     });
     
@@ -82,8 +86,12 @@ public class TP2App extends Application {
     		gauche.getSelectionModel().clearSelection(index);
     	}
     	
-    	if (gauche.getSelectionModel().isEmpty()) {
+    	if (gauche.getItems().size() == 0) {
     		versDroite.setDisable(true);
+    	}
+    	
+    	if (droite.getItems().size() > 0) {
+    		retireTout.setDisable(false);
     	}
     });
   }
@@ -144,7 +152,8 @@ public class TP2App extends Application {
 	  ajouteTout.setDisable(false);
   }
 
-  private void extraitIds(Scene scene) {
+  @SuppressWarnings("unchecked")
+private void extraitIds(Scene scene) {
     gauche = (ListView<String>) scene.lookup("#gauche");
     droite = (ListView<String>) scene.lookup("#droite");
     versGauche = (Button) scene.lookup("#versGauche");
