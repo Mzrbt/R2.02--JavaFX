@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -15,6 +17,8 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    
+    private double prevX, prevY;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -26,6 +30,19 @@ public class App extends Application {
         	if (!Dialogues.confirmation()) {
         		event.consume();
         	}
+        });
+        
+        Canvas dessin = (Canvas) scene.lookup("Canvas");	
+        
+        dessin.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+        	prevX = event.getSceneX();
+        	prevY = event.getSceneY();
+        });
+        
+        dessin.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
+        	dessin.getGraphicsContext2D().strokeLine(prevX, prevY, event.getX(), event.getY());
+        	prevX = event.getX();
+        	prevY = event.getY();
         });
     }
 
