@@ -5,7 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -43,6 +46,19 @@ public class App extends Application {
         	dessin.getGraphicsContext2D().strokeLine(prevX, prevY, event.getX(), event.getY());
         	prevX = event.getX();
         	prevY = event.getY();
+        });
+        
+        Pane pane = (Pane) dessin.getParent();
+        
+        pane.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+        	if (event.getButton() == MouseButton.SECONDARY) {
+        		Circle cercle = new Circle();
+            	cercle.setRadius(5f);
+            	cercle.setCenterX(event.getX());
+            	cercle.setCenterY(event.getY());
+            	cercle.setMouseTransparent(true);
+            	pane.getChildren().add(cercle);
+        	}
         });
     }
 
