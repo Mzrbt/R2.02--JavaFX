@@ -32,14 +32,13 @@ public class GrilleController implements Initializable{
                 
                 Label label = new Label();
                 
-                label.setText(model.getCase(ligne, colonne));
+                label.textProperty().bind(model.getCase(ligne, colonne));
                 label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 label.setAlignment(javafx.geometry.Pos.CENTER);
                 label.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
                 
                 label.setOnMouseClicked(event -> {
                 	model.setCase(ligne, colonne, "Bonjour");
-                	label.setText("Bonjour");
                 });
                 
                 grille.add(label, col, lg);
