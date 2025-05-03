@@ -50,6 +50,10 @@ public class App extends Application {
         
  
     }
+    
+    public void onMousePressed(MouseEvent evt) {
+    	
+    }
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
