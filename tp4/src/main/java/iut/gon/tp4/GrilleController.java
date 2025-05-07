@@ -71,9 +71,30 @@ public class GrilleController implements Initializable {
   }
 
   private void onGagne(String joueur) {
-    //TODO demander le nom du joueur
-    //TODO modifier scores
-    //TODO appeler la table des scores
+	  
+    if(joueur != null) {
+    	
+    	TextInputDialog dialog = new TextInputDialog();
+    	dialog.setTitle("Gagnant");
+    	dialog.setHeaderText("Quel est ton nom : ");
+    	dialog.setContentText("Nom : ");
+    	
+    	Optional<String> nom = dialog.showAndWait();
+    	
+    	table.ajouteVictoire(nom.get());
+    	
+    } else {
+    	
+    	table.ajouteNulle();
+    	
+    }
+    
+    try {
+		onMenuTable(null);
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+    
   }
 
   @FXML
