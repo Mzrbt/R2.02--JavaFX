@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,12 +16,13 @@ import java.util.ResourceBundle;
 public class TableController {
   public Label nbNulles;
   private Scores scores;
+  private Parent jeu;
 
   @FXML public TableView<Scores.Entree> table;
 
 
   public void onFermer(ActionEvent event) {
-    //TODO appeler la grille
+	  table.getScene().setRoot(jeu);
   }
 
   public void onReinit(ActionEvent event) {
@@ -33,5 +35,9 @@ public class TableController {
     table.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("joueur"));
     table.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("victoires"));
     nbNulles.textProperty().set(String.valueOf(scores.getNulles()));
+  }
+  
+  public void setJeu(Parent parent) {
+	  this.jeu = parent;
   }
 }

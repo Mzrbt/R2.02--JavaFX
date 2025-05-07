@@ -110,6 +110,9 @@ public class GrilleController implements Initializable {
     TableController controllerTable = fxmlLoader.getController();
     controllerTable.setScores(table);
     
+    Parent jeu = grille.getScene().getRoot();
+    controllerTable.setJeu(jeu);
+    
     grille.getScene().setRoot(parent);
   }
 
