@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import modele.Dessin;
 
 import java.io.IOException;
 
@@ -22,6 +23,8 @@ public class App extends Application {
     private static Scene scene;
     
     private double prevX, prevY;
+    
+    private static Dessin dessin2 = new Dessin();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -48,7 +51,7 @@ public class App extends Application {
         	prevY = event.getY();
         });
         
- 
+        
     }
     
     public void onMousePressed(MouseEvent evt) {
@@ -61,6 +64,7 @@ public class App extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        fxmlLoader.setController(dessin2);
         return fxmlLoader.load();
     }
 
