@@ -7,7 +7,12 @@ import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -22,6 +27,7 @@ public class ModeleDemineur {
   private ReadOnlyBooleanWrapper[][] marquees;
   private int[][] textes;
   private boolean[][] mines;
+
 
   /** Crée une zone à déminer avec une taille et un nombre de mines données */
   public ModeleDemineur(int tailleY, int tailleX, int nbMines) {

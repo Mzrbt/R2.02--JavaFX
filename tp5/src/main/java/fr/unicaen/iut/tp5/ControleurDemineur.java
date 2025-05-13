@@ -11,11 +11,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 
 public class ControleurDemineur implements Initializable{
 	
-	ModeleDemineur modele; 
+	ModeleDemineur modele = new ModeleDemineur(0, 0, 0); 
 	
 	StringExpression chaine;
 	
@@ -26,8 +28,8 @@ public class ControleurDemineur implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		modele.nbInconnuesProperty().asString(inconnues.getText());
-		modele.nbMarquesProperty().asString(marques.getText());
+		inconnues.textProperty().bind(modele.nbInconnuesProperty().asString());
+		marques.textProperty().bind(modele.nbMarquesProperty().asString());
 		
 		Diff.selectedToggleProperty().addListener((obs, oldV, newV) -> {
 			String userData = newV.getUserData().toString();
@@ -41,5 +43,17 @@ public class ControleurDemineur implements Initializable{
 		int[] donnees = modele.parseUserData(string);
 	
 		modele.setTaille(donnees[0], donnees[1], donnees[2]);
+		
+		for (int i = 0; i < tab.getRowCount(); i++) {
+			RowConstraints contrainte = new RowConstraints();
+			contrainte.setPrefHeight(32);
+			tab.getRowConstraints().add(contrainte);
+		}
+		
+		for (int j = 0; j < tab.getColumnCount(); j++) {
+			ColumnConstraints contrainte = new ColumnConstraints();
+			contrainte.setPrefWidth(32);
+			tab.getColumnConstraints().add(contrainte);
+		}
 	}
 }
