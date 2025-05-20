@@ -14,6 +14,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.shape.Rectangle;
+import modele.Dessin;
+import modele.Figure;
+import modele.Point;
+import modele.Trace;
 
 public class Controller implements Initializable{
 
@@ -81,11 +85,28 @@ public class Controller implements Initializable{
     private Rectangle violet;
     
     private double prevX, prevY;
+    
+    private Dessin dessin;
+    
+    private Trace trace;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		pane_cadre_dessin.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
+			pane_cadre_dessin.setPrefHeight(newValue.getHeight());
+			pane_cadre_dessin.setPrefWidth(newValue.getWidth());
+		});
+		
 		canva_cadre_dessin.heightProperty().bind(pane_cadre_dessin.heightProperty());
 		canva_cadre_dessin.widthProperty().bind(pane_cadre_dessin.widthProperty());
+		
+		canva_cadre_dessin.heightProperty().addListener((observableValue, oldValue, newValue) -> remakeCanva());
+		canva_cadre_dessin.widthProperty().addListener((observableValue, oldValue, newValue) -> remakeCanva());
+	}
+	
+	public Controller(Dessin dessin) {
+		this.dessin = dessin;
 	}
 	
 	public void onMousePressed(MouseEvent evt) {
@@ -93,14 +114,31 @@ public class Controller implements Initializable{
 		prevY = evt.getY();
 		val_x.setText(String.valueOf(prevX));
 		val_y.setText(String.valueOf(prevY));
+		trace = new Trace(1, "noir", prevX, prevY);
+		dessin.addFigure(trace);
 		
 	}
 	
 	public void onMouseDragged(MouseEvent evt) {
+		canva_cadre_dessin.getGraphicsContext2D().strokeLine(prevX, prevY, evt.getX(), evt.getY());
+    	trace.addPoint(new Point(prevX, prevY));
     	prevX = evt.getX();
     	prevY = evt.getY();
     	val_x.setText(String.valueOf(prevX));
 		val_y.setText(String.valueOf(prevY));
 	}
-
+	
+	private void remakeCanva() {
+		canva_cadre_dessin.getGraphicsContext2D().clearRect(0, 0, canva_cadre_dessin.getWidth(), canva_cadre_dessin.getHeight());
+		for (Figure f : dessin.getFigures()) {
+			for (int i = 1; i < f.getPoints().size(); i++) {
+				double x0 = f.getPoints().get(i-1).getX();
+				double y0 = f.getPoints().get(i-1).getY();
+				double x1 = f.getPoints().get(i).getX();
+				double y1 = f.getPoints().get(i).getY();
+				
+				canva_cadre_dessin.getGraphicsContext2D().strokeLine(x0, y0, x1, y1);
+			}
+		}
+	}
 }

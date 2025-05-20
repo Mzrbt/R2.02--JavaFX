@@ -24,10 +24,14 @@ public class App extends Application {
     
     private double prevX, prevY;
     
-    private static Dessin dessin2 = new Dessin();
-
+    public static Controller controller;
+    
     @Override
     public void start(Stage stage) throws IOException {
+    	
+    	Dessin dessin = new Dessin();
+     	controller = new Controller(dessin);
+    	
         scene = new Scene(loadFXML("CadreGribouille"), 640, 480);
         stage.setScene(scene);
         stage.show();
@@ -37,26 +41,8 @@ public class App extends Application {
         		event.consume();
         	}
         });
-        
-        Canvas dessin = (Canvas) scene.lookup("Canvas");	
-        
-        dessin.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-        	prevX = event.getX();
-        	prevY = event.getY();
-        });
-        
-        dessin.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
-        	dessin.getGraphicsContext2D().strokeLine(prevX, prevY, event.getX(), event.getY());
-        	prevX = event.getX();
-        	prevY = event.getY();
-        });
-        
-        
-    }
-    
-    public void onMousePressed(MouseEvent evt) {
-    	
-    }
+       
+    }	
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
@@ -64,7 +50,7 @@ public class App extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        fxmlLoader.setController(dessin2);
+        fxmlLoader.setController(controller);
         return fxmlLoader.load();
     }
 
