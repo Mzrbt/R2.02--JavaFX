@@ -2,6 +2,8 @@ package tp1;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -84,7 +86,8 @@ public class Controller implements Initializable{
     @FXML
     private Rectangle violet;
     
-    private double prevX, prevY;
+    private SimpleDoubleProperty prevX = new SimpleDoubleProperty();
+    private SimpleDoubleProperty prevY = new SimpleDoubleProperty();
     
     private Dessin dessin;
     
@@ -103,6 +106,9 @@ public class Controller implements Initializable{
 		
 		canva_cadre_dessin.heightProperty().addListener((observableValue, oldValue, newValue) -> remakeCanva());
 		canva_cadre_dessin.widthProperty().addListener((observableValue, oldValue, newValue) -> remakeCanva());
+		
+		val_x.textProperty().bind(Bindings.format("%.2f", prevX));
+	    val_y.textProperty().bind(Bindings.format("%.2f", prevY));
 	}
 	
 	public Controller(Dessin dessin) {
@@ -110,22 +116,18 @@ public class Controller implements Initializable{
 	}
 	
 	public void onMousePressed(MouseEvent evt) {
-		prevX = evt.getX();
-		prevY = evt.getY();
-		val_x.setText(String.valueOf(prevX));
-		val_y.setText(String.valueOf(prevY));
-		trace = new Trace(1, "noir", prevX, prevY);
+		prevX.set(evt.getX());
+		prevY.set(evt.getY());
+		trace = new Trace(1, "noir", prevX.get(), prevY.get());
 		dessin.addFigure(trace);
 		
 	}
 	
 	public void onMouseDragged(MouseEvent evt) {
-		canva_cadre_dessin.getGraphicsContext2D().strokeLine(prevX, prevY, evt.getX(), evt.getY());
-    	trace.addPoint(new Point(prevX, prevY));
-    	prevX = evt.getX();
-    	prevY = evt.getY();
-    	val_x.setText(String.valueOf(prevX));
-		val_y.setText(String.valueOf(prevY));
+		canva_cadre_dessin.getGraphicsContext2D().strokeLine(prevX.get(), prevY.get(), evt.getX(), evt.getY());
+    	trace.addPoint(new Point(prevX.get(), prevY.get()));
+    	prevX.set(evt.getX());
+		prevY.set(evt.getY());
 	}
 	
 	private void remakeCanva() {
@@ -140,5 +142,10 @@ public class Controller implements Initializable{
 				canva_cadre_dessin.getGraphicsContext2D().strokeLine(x0, y0, x1, y1);
 			}
 		}
+	}
+	
+	public void onMouseMoved(MouseEvent evt) {
+		prevX.set(evt.getX());
+		prevY.set(evt.getY());
 	}
 }

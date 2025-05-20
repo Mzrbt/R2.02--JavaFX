@@ -30,6 +30,8 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
     	
     	Dessin dessin = new Dessin();
+    	dessin.setNomDuFichier("Mon dessin");
+    	stage.setTitle(dessin.getNomDuFichier());
      	controller = new Controller(dessin);
     	
         scene = new Scene(loadFXML("CadreGribouille"), 640, 480);
