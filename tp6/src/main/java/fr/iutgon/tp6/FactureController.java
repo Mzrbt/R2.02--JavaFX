@@ -6,6 +6,7 @@ import fr.iutgon.tp6.modele.Produit;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberExpression;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.ChoiceBoxTableCell;
@@ -45,7 +47,48 @@ public class FactureController implements Initializable {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-   
+	  this.qte.setCellValueFactory(new PropertyValueFactory<>("qte"));
+		
+	  Callback<CellDataFeatures<Ligne, Produit>, ObservableValue<Produit>> p = new Callback<TableColumn.CellDataFeatures<Ligne,Produit>, ObservableValue<Produit>>() {
+		
+		@Override
+		public ObservableValue<Produit> call(CellDataFeatures<Ligne, Produit> param) {
+			return param.getValue().produitProperty();
+		}
+	  };
+	
+	  this.produit.setCellValueFactory(p);
+	
+	  Callback<CellDataFeatures<Ligne, Number>, ObservableValue<Number>> n = new Callback<TableColumn.CellDataFeatures<Ligne,Number>, ObservableValue<Number>>() {
+			
+		@Override
+		public ObservableValue<Number> call(CellDataFeatures<Ligne, Number> param) {
+			return param.getValue().getProduit().prixProperty();
+		}
+	  };
+	    
+	  this.prixUnitaire.setCellValueFactory(n);
+	  
+	  Callback<CellDataFeatures<Ligne, Number>, ObservableValue<Number>> ht = new Callback<TableColumn.CellDataFeatures<Ligne,Number>, ObservableValue<Number>>() {
+			
+		@Override
+		public ObservableValue<Number> call(CellDataFeatures<Ligne, Number> param) {
+			return param.getValue().totalHTProperty();
+		}
+	  };
+		    
+	  this.totalHT.setCellValueFactory(ht);
+		  
+	
+	  Callback<CellDataFeatures<Ligne, Number>, ObservableValue<Number>> ttc = new Callback<TableColumn.CellDataFeatures<Ligne,Number>, ObservableValue<Number>>() {
+				
+			@Override
+			public ObservableValue<Number> call(CellDataFeatures<Ligne, Number> param) {
+				return param.getValue().totalTTCProperty();
+			}
+	  };
+			    
+	  this.totalTTC.setCellValueFactory(ttc);
   }
 
   public void onAjouter(ActionEvent actionEvent) {
