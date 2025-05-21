@@ -56,7 +56,6 @@ public class FactureController implements Initializable {
 			return param.getValue().produitProperty();
 		}
 	  };
-	
 	  this.produit.setCellValueFactory(p);
 	
 	  Callback<CellDataFeatures<Ligne, Number>, ObservableValue<Number>> n = new Callback<TableColumn.CellDataFeatures<Ligne,Number>, ObservableValue<Number>>() {
@@ -66,7 +65,6 @@ public class FactureController implements Initializable {
 			return param.getValue().getProduit().prixProperty();
 		}
 	  };
-	    
 	  this.prixUnitaire.setCellValueFactory(n);
 	  
 	  Callback<CellDataFeatures<Ligne, Number>, ObservableValue<Number>> ht = new Callback<TableColumn.CellDataFeatures<Ligne,Number>, ObservableValue<Number>>() {
@@ -76,10 +74,8 @@ public class FactureController implements Initializable {
 			return param.getValue().totalHTProperty();
 		}
 	  };
-		    
 	  this.totalHT.setCellValueFactory(ht);
 		  
-	
 	  Callback<CellDataFeatures<Ligne, Number>, ObservableValue<Number>> ttc = new Callback<TableColumn.CellDataFeatures<Ligne,Number>, ObservableValue<Number>>() {
 				
 			@Override
@@ -87,11 +83,16 @@ public class FactureController implements Initializable {
 				return param.getValue().totalTTCProperty();
 			}
 	  };
-			    
 	  this.totalTTC.setCellValueFactory(ttc);
+	  
+	  
+	  qte.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
   }
 
-  public void onAjouter(ActionEvent actionEvent) {
+  
+
+
+public void onAjouter(ActionEvent actionEvent) {
 	Random random = new Random();
 	int qte = random.nextInt(100);
     Ligne ligne = new Ligne(qte, new Produit("Balle de squash",4,1.2f));
