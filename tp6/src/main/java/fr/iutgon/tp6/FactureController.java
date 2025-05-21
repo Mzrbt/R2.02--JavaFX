@@ -35,7 +35,7 @@ public class FactureController implements Initializable {
   public TableColumn<Ligne, Number> totalHT;
   public TableColumn<Ligne, Number> totalTTC;
   public TextField sommeFacture;
-
+  
   /**
    Called to initialize a controller after its root element has been completely processed.
 
@@ -45,10 +45,13 @@ public class FactureController implements Initializable {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    //TODO préparer la table
+   
   }
 
   public void onAjouter(ActionEvent actionEvent) {
-    //TODO ajouter un produit aléatoire à la table
+	Random random = new Random();
+	int qte = random.nextInt(100);
+    Ligne ligne = new Ligne(qte, new Produit("Balle de squash",4,1.2f));
+    table.getItems().add(ligne);
   }
 }
