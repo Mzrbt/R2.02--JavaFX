@@ -15,6 +15,8 @@ import modele.Dessin;
 
 import java.io.IOException;
 
+import controleurs.Controleur;
+
 /**
  * JavaFX App
  */
@@ -37,13 +39,10 @@ public class App extends Application {
         scene = new Scene(loadFXML("CadreGribouille"), 640, 480);
         stage.setScene(scene);
         stage.show();
-        
-        stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, event -> {
-        	if (!Dialogues.confirmation()) {
-        		event.consume();
-        	}
-        });
        
+        stage.setOnCloseRequest((evt) -> {
+        	Controleur.onCloseRequest(evt);
+        });
     }	
 
     static void setRoot(String fxml) throws IOException {

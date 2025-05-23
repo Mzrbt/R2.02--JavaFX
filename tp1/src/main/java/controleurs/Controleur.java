@@ -8,8 +8,10 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.paint.Color;
+import javafx.stage.WindowEvent;
 import modele.Dessin;
 import modele.Figure;
+import tp1.Dialogues;
 
 public class Controleur {
 
@@ -33,6 +35,19 @@ public class Controleur {
 		statutController.setControleur(this);
 		couleursController.setControleur(this);
 
+	}
+	
+	public static boolean onQuitter() {
+		if (Dialogues.confirmation()) {
+			return true;
+		}
+	return false;
+	}
+	
+	public static void onCloseRequest(WindowEvent evt) {
+		if (!onQuitter()) {
+			evt.consume();
+		}
 	}
 	
 }

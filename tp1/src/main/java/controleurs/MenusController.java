@@ -1,5 +1,6 @@
 package controleurs;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleGroup;
 
@@ -14,4 +15,10 @@ public class MenusController {
     	this.controleur = c;
     }
     
+    @FXML
+    public void onQuitte() {
+    	if (Controleur.onQuitter()) {
+    		Platform.exit();
+    	}
+    }
 }
