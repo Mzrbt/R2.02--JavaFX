@@ -1,149 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.ColorPicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioMenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.TilePane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 
 <BorderPane fx:id="principal" maxHeight="900.0" maxWidth="1190.0" prefHeight="900.0" prefWidth="1190.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <MenuBar prefHeight="27.0" prefWidth="1172.0" BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="Dessin">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Charger" />
-                  <MenuItem mnemonicParsing="false" text="Sauvegarder" />
-                  <MenuItem mnemonicParsing="false" text="Exporter" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Quitter" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Outils">
-            <items>
-                  <Menu mnemonicParsing="false" text="Epaisseur">
-                    <items>
-                        <RadioMenuItem mnemonicParsing="false" text="1">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="Epaisseur" />
-                           </toggleGroup>
-                        </RadioMenuItem>
-                        <RadioMenuItem mnemonicParsing="false" text="2" toggleGroup="$Epaisseur" />
-                        <RadioMenuItem mnemonicParsing="false" text="3" toggleGroup="$Epaisseur" />
-                        <RadioMenuItem mnemonicParsing="false" text="4" toggleGroup="$Epaisseur" />
-                        <RadioMenuItem mnemonicParsing="false" text="5" toggleGroup="$Epaisseur" />
-                        <RadioMenuItem mnemonicParsing="false" text="6" toggleGroup="$Epaisseur" />
-                        <RadioMenuItem mnemonicParsing="false" text="7" toggleGroup="$Epaisseur" />
-                        <RadioMenuItem mnemonicParsing="false" text="8" toggleGroup="$Epaisseur" />
-                        <RadioMenuItem mnemonicParsing="false" text="9" toggleGroup="$Epaisseur" />
-                    </items>
-                  </Menu>
-                  <RadioMenuItem mnemonicParsing="false" text="Crayon">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="Forme" />
-                     </toggleGroup>
-                  </RadioMenuItem>
-                  <RadioMenuItem mnemonicParsing="false" text="Etoile" toggleGroup="$Forme" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Aide">
-            <items>
-              <MenuItem mnemonicParsing="false" text="A propos" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+      <fx:include source="menus.fxml" fx:id="menus"/>
    </top>
    <bottom>
-      <GridPane fx:id="barre_inferieure" prefHeight="44.0" prefWidth="1172.0" BorderPane.alignment="CENTER">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="238.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="238.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="238.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="238.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="0.0" prefWidth="238.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label fx:id="couleur" prefHeight="75.0" prefWidth="238.0" text="Couleur" GridPane.columnIndex="4" />
-            <Label fx:id="outil" prefHeight="75.0" prefWidth="330.0" text="Outil" GridPane.columnIndex="3" />
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label prefHeight="44.0" prefWidth="18.0" text="X : " />
-                  <Label fx:id="val_x" prefHeight="49.0" prefWidth="220.0" text="Label" />
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
-               <children>
-                  <Label prefHeight="46.0" prefWidth="18.0" text="Y : " />
-                  <Label fx:id="val_y" prefHeight="59.0" prefWidth="220.0" text="Label" />
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
-               <children>
-                  <Label prefHeight="44.0" prefWidth="78.0" text="Epaisseur : " />
-                  <Label fx:id="epaisseur" prefHeight="59.0" prefWidth="168.0" text="Label" />
-               </children>
-            </HBox>
-         </children>
-      </GridPane>
+      <fx:include source="statut.fxml" fx:id="statut"/>
    </bottom>
    <center>
-      <Pane fx:id="pane_cadre_dessin" prefHeight="835.0" prefWidth="1190.0" BorderPane.alignment="CENTER">
-         <children>
-            <Canvas fx:id="canva_cadre_dessin" onMousePressed="#onMousePressed" onMouseDragged="#onMouseDragged" onMouseMoved="#onMouseMoved" height="837.0" width="953.0" />
-         </children>
-      </Pane>
+      <fx:include source="dessin.fxml" fx:id="dessin"/>
    </center>
    <right>
-      <VBox prefHeight="829.0" prefWidth="236.0" style="-fx-background-color: lightgray;" BorderPane.alignment="CENTER">
-         <children>
-            <ColorPicker fx:id="colorpicker_choix_couleur" prefHeight="46.0" prefWidth="241.0" />
-            <TilePane fx:id="pane_choix_couleur" prefColumns="2" prefHeight="200.0" prefRows="8" prefWidth="200.0">
-               <children>
-                  <Rectangle fx:id="rouge" arcHeight="5.0" arcWidth="5.0" fill="RED" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0">
-                     <TilePane.margin>
-                        <Insets bottom="2.5" left="5.0" right="2.5" top="5.0" />
-                     </TilePane.margin>
-                  </Rectangle>
-                  <Rectangle fx:id="vert" arcHeight="5.0" arcWidth="5.0" fill="LIME" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0">
-                     <TilePane.margin>
-                        <Insets bottom="2.5" left="2.5" right="5.0" top="5.0" />
-                     </TilePane.margin>
-                  </Rectangle>
-                  <Rectangle fx:id="bleu_fonce" arcHeight="5.0" arcWidth="5.0" fill="#1f29ff" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0">
-                     <TilePane.margin>
-                        <Insets bottom="2.5" left="5.0" right="2.5" top="2.5" />
-                     </TilePane.margin>
-                  </Rectangle>
-                  <Rectangle fx:id="bleu_clair" arcHeight="5.0" arcWidth="5.0" fill="#05f7f7" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0">
-                     <TilePane.margin>
-                        <Insets bottom="2.5" left="2.5" right="5.0" top="2.5" />
-                     </TilePane.margin>
-                  </Rectangle>
-                  <Rectangle fx:id="violet" arcHeight="5.0" arcWidth="5.0" fill="PURPLE" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0" />
-                  <Rectangle fx:id="jaune" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0" />
-                  <Rectangle fx:id="noir" arcHeight="5.0" arcWidth="5.0" fill="BLACK" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0" />
-                  <Rectangle fx:id="blanc" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0" />
-               </children>
-            </TilePane>
-         </children>
-      </VBox>
+      <fx:include source="couleurs.fxml" fx:id="couleurs"/>
    </right>
 </BorderPane>

@@ -23,68 +23,7 @@ import modele.Trace;
 
 public class Controller implements Initializable{
 
-    @FXML
-    private ToggleGroup Epaisseur;
-
-    @FXML
-    private ToggleGroup Forme;
-
-    @FXML
-    private GridPane barre_inferieure;
-
-    @FXML
-    private Rectangle blanc;
-
-    @FXML
-    private Rectangle bleu_clair;
-
-    @FXML
-    private Rectangle bleu_fonce;
-
-    @FXML
-    private Canvas canva_cadre_dessin;
-
-    @FXML
-    private ColorPicker colorpicker_choix_couleur;
-
-    @FXML
-    private Label couleur;
-
-    @FXML
-    private Label epaisseur;
-
-    @FXML
-    private Rectangle jaune;
-
-    @FXML
-    private Rectangle noir;
-
-    @FXML
-    private Label outil;
-
-    @FXML
-    private Pane pane_cadre_dessin;
-
-    @FXML
-    private TilePane pane_choix_couleur;
-
-    @FXML
-    private BorderPane principal;
-
-    @FXML
-    private Rectangle rouge;
-
-    @FXML
-    private Label val_x;
-
-    @FXML
-    private Label val_y;
-
-    @FXML
-    private Rectangle vert;
-
-    @FXML
-    private Rectangle violet;
+	@FXML public BorderPane principal;
     
     private SimpleDoubleProperty prevX = new SimpleDoubleProperty();
     private SimpleDoubleProperty prevY = new SimpleDoubleProperty();

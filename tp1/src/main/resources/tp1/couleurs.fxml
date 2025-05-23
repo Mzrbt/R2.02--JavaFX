@@ -1,0 +1,33 @@
+<VBox prefHeight="829.0" prefWidth="236.0" style="-fx-background-color: lightgray;" BorderPane.alignment="CENTER">
+	<children>
+    	<ColorPicker fx:id="colorpicker_choix_couleur" prefHeight="46.0" prefWidth="241.0" />
+        <TilePane fx:id="pane_choix_couleur" prefColumns="2" prefHeight="200.0" prefRows="8" prefWidth="200.0">
+        	<children>
+            	<Rectangle fx:id="rouge" arcHeight="5.0" arcWidth="5.0" fill="RED" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0">
+                	<TilePane.margin>
+                        <Insets bottom="2.5" left="5.0" right="2.5" top="5.0" />
+                    </TilePane.margin>
+                 </Rectangle>
+                 <Rectangle fx:id="vert" arcHeight="5.0" arcWidth="5.0" fill="LIME" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0">
+                    <TilePane.margin>
+                       <Insets bottom="2.5" left="2.5" right="5.0" top="5.0" />
+                    </TilePane.margin>
+                 </Rectangle>
+                 <Rectangle fx:id="bleu_fonce" arcHeight="5.0" arcWidth="5.0" fill="#1f29ff" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0">
+                    <TilePane.margin>
+                       <Insets bottom="2.5" left="5.0" right="2.5" top="2.5" />
+                    </TilePane.margin>
+                 </Rectangle>
+                 <Rectangle fx:id="bleu_clair" arcHeight="5.0" arcWidth="5.0" fill="#05f7f7" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0">
+                    <TilePane.margin>
+                       <Insets bottom="2.5" left="2.5" right="5.0" top="2.5" />
+                    </TilePane.margin>
+                 </Rectangle>
+                 <Rectangle fx:id="violet" arcHeight="5.0" arcWidth="5.0" fill="PURPLE" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0" />
+                 <Rectangle fx:id="jaune" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0" />
+                 <Rectangle fx:id="noir" arcHeight="5.0" arcWidth="5.0" fill="BLACK" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0" />
+                 <Rectangle fx:id="blanc" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="110.0" stroke="BLACK" strokeType="INSIDE" width="110.0" />
+        	</children>
+    	</TilePane>
+	</children>
+</VBox>

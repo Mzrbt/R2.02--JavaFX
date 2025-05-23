@@ -1,0 +1,17 @@
+package controleurs;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.ToggleGroup;
+
+public class MenusController {
+
+    @FXML public ToggleGroup Epaisseur;
+    @FXML public ToggleGroup Forme;
+
+    public Controleur controleur;
+    
+    public void setControleur(Controleur c) {
+    	this.controleur = c;
+    }
+    
+}
