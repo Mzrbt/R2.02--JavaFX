@@ -15,7 +15,7 @@ import tp1.Dialogues;
 
 public class Controleur {
 
-	public final Dessin dessin = new Dessin();
+	public final static Dessin dessin = new Dessin();
 	private Figure figure;
 	public final SimpleDoubleProperty prevX = new SimpleDoubleProperty();
     public final SimpleDoubleProperty prevY = new SimpleDoubleProperty();
@@ -50,4 +50,17 @@ public class Controleur {
 		}
 	}
 	
+	public static void remakeCanva() {
+		DessinController.canva_cadre_dessin.getGraphicsContext2D().clearRect(0, 0, DessinController.canva_cadre_dessin.getWidth(), DessinController.canva_cadre_dessin.getHeight());
+		for (Figure f : dessin.getFigures()) {
+			for (int i = 1; i < f.getPoints().size(); i++) {
+				double x0 = f.getPoints().get(i-1).getX();
+				double y0 = f.getPoints().get(i-1).getY();
+				double x1 = f.getPoints().get(i).getX();
+				double y1 = f.getPoints().get(i).getY();
+				
+				DessinController.canva_cadre_dessin.getGraphicsContext2D().strokeLine(x0, y0, x1, y1);
+			}
+		}
+	}
 }

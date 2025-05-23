@@ -35,17 +35,6 @@ public class Controller implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		pane_cadre_dessin.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
-			pane_cadre_dessin.setPrefHeight(newValue.getHeight());
-			pane_cadre_dessin.setPrefWidth(newValue.getWidth());
-		});
-		
-		canva_cadre_dessin.heightProperty().bind(pane_cadre_dessin.heightProperty());
-		canva_cadre_dessin.widthProperty().bind(pane_cadre_dessin.widthProperty());
-		
-		canva_cadre_dessin.heightProperty().addListener((observableValue, oldValue, newValue) -> remakeCanva());
-		canva_cadre_dessin.widthProperty().addListener((observableValue, oldValue, newValue) -> remakeCanva());
-		
 		val_x.textProperty().bind(Bindings.format("%.2f", prevX));
 	    val_y.textProperty().bind(Bindings.format("%.2f", prevY));
 	}
@@ -54,37 +43,5 @@ public class Controller implements Initializable{
 		this.dessin = dessin;
 	}
 	
-	public void onMousePressed(MouseEvent evt) {
-		prevX.set(evt.getX());
-		prevY.set(evt.getY());
-		trace = new Trace(1, "noir", prevX.get(), prevY.get());
-		dessin.addFigure(trace);
-		
-	}
 	
-	public void onMouseDragged(MouseEvent evt) {
-		canva_cadre_dessin.getGraphicsContext2D().strokeLine(prevX.get(), prevY.get(), evt.getX(), evt.getY());
-    	trace.addPoint(new Point(prevX.get(), prevY.get()));
-    	prevX.set(evt.getX());
-		prevY.set(evt.getY());
-	}
-	
-	private void remakeCanva() {
-		canva_cadre_dessin.getGraphicsContext2D().clearRect(0, 0, canva_cadre_dessin.getWidth(), canva_cadre_dessin.getHeight());
-		for (Figure f : dessin.getFigures()) {
-			for (int i = 1; i < f.getPoints().size(); i++) {
-				double x0 = f.getPoints().get(i-1).getX();
-				double y0 = f.getPoints().get(i-1).getY();
-				double x1 = f.getPoints().get(i).getX();
-				double y1 = f.getPoints().get(i).getY();
-				
-				canva_cadre_dessin.getGraphicsContext2D().strokeLine(x0, y0, x1, y1);
-			}
-		}
-	}
-	
-	public void onMouseMoved(MouseEvent evt) {
-		prevX.set(evt.getX());
-		prevY.set(evt.getY());
-	}
 }
