@@ -9,6 +9,7 @@ import javafx.beans.binding.StringExpression;
 import javafx.collections.MapChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.ColumnConstraints;
@@ -38,11 +39,18 @@ public class ControleurDemineur implements Initializable{
 	}
 	
 	public void initGrille(String string) {
-		GridPane.clearConstraints(tab);
+		tab.getRowConstraints().clear();
+		tab.getColumnConstraints().clear();
+		tab.getChildren().clear(); 
 		
 		int[] donnees = modele.parseUserData(string);
+		int nbLignes = donnees[0];
+	    int nbColonnes = donnees[1];	
+	    int nbMines = donnees[2];
 	
-		modele.setTaille(donnees[0], donnees[1], donnees[2]);
+		modele.setTaille(nbLignes, nbColonnes, nbMines);
+		
+		tab.setAlignment(Pos.CENTER);
 		
 		for (int i = 0; i < tab.getRowCount(); i++) {
 			RowConstraints contrainte = new RowConstraints();
@@ -55,5 +63,14 @@ public class ControleurDemineur implements Initializable{
 			contrainte.setPrefWidth(32);
 			tab.getColumnConstraints().add(contrainte);
 		}
+		
+		for (int y = 0; y < nbLignes; y++) {
+	        for (int x = 0; x < nbColonnes; x++) {
+	            javafx.scene.control.Label caseLabel = new javafx.scene.control.Label("?");
+	            caseLabel.setPrefSize(32, 32);
+	            caseLabel.setStyle("-fx-border-color: black; -fx-alignment: center;");
+	            tab.add(caseLabel, x, y);
+	        }
+	    }
 	}
 }
