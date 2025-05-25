@@ -87,15 +87,31 @@ public class FactureController implements Initializable {
 	  
 	  
 	  qte.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+	  
+	  produit.setCellValueFactory(param -> {
+		  return param.getValue().produitProperty();
+	  });
+	  produit.setCellFactory(cell -> new ChoiceBoxTableCell<>(new StringConverter<Produit>() {
+			  	
+		public String toString(Produit produit) {
+			return produit == null ? "" : produit.toString();
+		}
+		
+		public Produit fromString(String string) {
+			return FabriqueProduits.getProduits()
+				.stream()
+				.filter(p -> p.toString().equals(string))
+				.findFirst()
+				.orElse(null);
+		}
+	  }, FXCollections.observableArrayList(FabriqueProduits.getProduits())
+	 ));
   }
 
-  
-
-
-public void onAjouter(ActionEvent actionEvent) {
+  public void onAjouter(ActionEvent actionEvent) {
 	Random random = new Random();
 	int qte = random.nextInt(100);
     Ligne ligne = new Ligne(qte, new Produit("Balle de squash",4,1.2f));
     table.getItems().add(ligne);
   }
-}
+  }
