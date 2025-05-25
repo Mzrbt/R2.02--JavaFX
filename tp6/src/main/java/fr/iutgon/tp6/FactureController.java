@@ -113,5 +113,27 @@ public class FactureController implements Initializable {
 	int qte = random.nextInt(100);
     Ligne ligne = new Ligne(qte, new Produit("Balle de squash",4,1.2f));
     table.getItems().add(ligne);
+    
+    ligne.qteProperty().addListener((obs, oldVal, newVal) -> {
+        double somme = 0;
+        for (Ligne l : table.getItems()) {
+            somme += l.totalTTCProperty().getValue().doubleValue();
+        }
+        sommeFacture.setText(String.format("%.2f", somme));
+    });
+
+    ligne.produitProperty().addListener((obs, oldVal, newVal) -> {
+        double somme = 0;
+        for (Ligne l : table.getItems()) {
+            somme += l.totalTTCProperty().getValue().doubleValue();
+        }
+        sommeFacture.setText(String.format("%.2f", somme));
+    });
+
+    double somme = 0;
+    for (Ligne l : table.getItems()) {
+        somme += l.totalTTCProperty().getValue().doubleValue();
+    }
+    sommeFacture.setText(String.format("%.2f", somme));
   }
   }
