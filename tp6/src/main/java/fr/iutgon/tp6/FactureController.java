@@ -106,6 +106,10 @@ public class FactureController implements Initializable {
 		}
 	  }, FXCollections.observableArrayList(FabriqueProduits.getProduits())
 	 ));
+	  
+	  totalHT.setCellFactory(col -> new FactureCellFactory<>());
+	  totalTTC.setCellFactory(col -> new FactureCellFactory<>());
+
   }
 
   public void onAjouter(ActionEvent actionEvent) {
