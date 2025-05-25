@@ -22,7 +22,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Jeu">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Quitter" />
+                    <MenuItem mnemonicParsing="false" text="Quitter"  onAction="#onQuitter"/>
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Difficulté">
@@ -50,7 +50,7 @@
       </VBox>
    </top>
    <center>
-      <GridPane fx:id="tab" gridLinesVisible="true" BorderPane.alignment="CENTER">
+      <GridPane fx:id="tab" gridLinesVisible="true">
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>

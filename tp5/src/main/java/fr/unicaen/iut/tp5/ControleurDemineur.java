@@ -3,18 +3,25 @@ package fr.unicaen.iut.tp5;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.WeakInvalidationListener;
 import javafx.beans.binding.StringExpression;
 import javafx.collections.MapChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
+
 
 public class ControleurDemineur implements Initializable{
 	
@@ -26,6 +33,11 @@ public class ControleurDemineur implements Initializable{
 	private @FXML TextField marques;
 	private @FXML ToggleGroup Diff;
 	private @FXML GridPane tab;
+	
+	private final Background inconnu = new Background(new BackgroundFill(Color.AQUA, new CornerRadii(0.2, true), Insets.EMPTY));
+	private final Background libre = new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY));
+	private final Background echec = new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY));
+	private final Background marquee = new Background(new BackgroundFill(Color.LEMONCHIFFON, CornerRadii.EMPTY, Insets.EMPTY));
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -64,13 +76,47 @@ public class ControleurDemineur implements Initializable{
 			tab.getColumnConstraints().add(contrainte);
 		}
 		
-		for (int y = 0; y < nbLignes; y++) {
-	        for (int x = 0; x < nbColonnes; x++) {
-	            javafx.scene.control.Label caseLabel = new javafx.scene.control.Label("?");
-	            caseLabel.setPrefSize(32, 32);
-	            caseLabel.setStyle("-fx-border-color: black; -fx-alignment: center;");
-	            tab.add(caseLabel, x, y);
+		for (int i = 0; i < nbLignes; i++) {
+	        for (int j = 0; j < nbColonnes; j++) {
+	        	Label label = new Label();
+				label.setPrefSize(31, 31);
+				label.setBackground(inconnu);
+				label.setTextAlignment(TextAlignment.CENTER);
+				label.textProperty().bind(modele.texteProperty(i,j));
+				
+				int x = i;
+				int y = j;
+				
+				label.addEventHandler(MouseEvent.MOUSE_CLICKED, (evt) -> {
+					if (evt.getButton() == MouseButton.PRIMARY) {
+						modele.revele(x, y);
+					}
+					else if (evt.getButton() == MouseButton.SECONDARY) {
+						modele.marque(x, y);
+					}
+					if (modele.getText(x, y).equals("?")) {label.setBackground(inconnu);}
+					if (modele.getText(x, y).equals("P")) {label.setBackground(marquee);}
+					if (modele.getText(x, y).equals("X")) {label.setBackground(echec);
+					
+						if (evt.getButton() == MouseButton.PRIMARY) {
+							Alert alert = new Alert(Alert.AlertType.INFORMATION);
+							alert.setTitle("Fin de partie");
+							alert.setHeaderText(null);
+							alert.setContentText("Vous avez perdu !");
+							alert.setOnHidden(e -> initGrille(string));
+							alert.show();
+				    	}
+					}
+					
+					else {label.setBackground(libre);}
+				});
+				
+				tab.add(label, j, i);
 	        }
 	    }
+	}
+	
+	public void onQuitter() {
+		Platform.exit();
 	}
 }
