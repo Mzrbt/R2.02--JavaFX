@@ -17,6 +17,7 @@ import javafx.scene.control.RadioMenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import modele.Dessin;
 import modele.Figure;
@@ -34,6 +35,8 @@ public class Controleur implements Initializable{
 	public final SimpleObjectProperty<Color> couleur = new SimpleObjectProperty<Color>(Color.BLACK);
 	
 	private boolean figureEnCoursAjoutee = false;
+	
+	private Stage stage;
 		
 	@FXML private MenusController menusController;
 	@FXML private DessinController dessinController;
@@ -46,6 +49,7 @@ public class Controleur implements Initializable{
 		dessinController.setControleur(this);
 		statutController.setControleur(this);
 		couleursController.setControleur(this);
+		menusController.setDessinControleur(dessinController);
 		
 		statutController.val_x.textProperty().bind(prevX.asString("X: %.2f"));
 	    statutController.val_y.textProperty().bind(prevY.asString("Y: %.2f"));
@@ -133,4 +137,8 @@ public class Controleur implements Initializable{
 		couleur.set(c);
 		dessinController.setCouleur(c);
 	}
+	
+	public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 }

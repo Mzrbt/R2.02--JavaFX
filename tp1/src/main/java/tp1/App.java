@@ -16,6 +16,7 @@ import modele.Dessin;
 import java.io.IOException;
 
 import controleurs.Controleur;
+import controleurs.MenusController;
 
 /**
  * JavaFX App
@@ -30,20 +31,31 @@ public class App extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
-    	
-    	Dessin dessin = new Dessin();
-    	dessin.setNomDuFichier("Mon dessin");
-    	stage.setTitle(dessin.getNomDuFichier());
-     	controller = new Controleur();
-    	
-        scene = new Scene(loadFXML("CadreGribouille"), 640, 480);
+        Dessin dessin = new Dessin();
+        dessin.setNomDuFichier("Mon dessin");
+        stage.setTitle(dessin.getNomDuFichier());
+        
+        controller = new Controleur();
+
+        // Crée explicitement le FXMLLoader
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("CadreGribouille.fxml"));
+        Parent root = loader.load();
+
+        // Récupère le contrôleur
+        Controleur controller = loader.getController();
+        controller.setStage(stage);
+
+        // Crée la scène
+        scene = new Scene(root, 640, 480);
         stage.setScene(scene);
         stage.show();
-       
+
+        // Gère la fermeture
         stage.setOnCloseRequest((evt) -> {
-        	Controleur.onCloseRequest(evt);
+            Controleur.onCloseRequest(evt);
         });
-    }	
+    }
+	
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));

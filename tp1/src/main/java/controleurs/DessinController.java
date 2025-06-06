@@ -1,5 +1,6 @@
 package controleurs;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -10,6 +11,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class DessinController implements Initializable{
 
@@ -17,6 +20,8 @@ public class DessinController implements Initializable{
 	@FXML public Canvas canva_cadre_dessin;
 	
 	private Controleur controleur;
+	
+	private Stage stage;
     
     public void setControleur(Controleur c) {
     	this.controleur = c;
@@ -78,4 +83,25 @@ public class DessinController implements Initializable{
     	GraphicsContext gc = canva_cadre_dessin.getGraphicsContext2D();
         gc.setStroke(c);
     }
+    
+    public void sauvegarde() {
+    	FileChooser f = new FileChooser();
+    	f.setTitle("Enregistrer le dessin");
+    	f.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers dessin", "*.grb"));
+
+        File fichierChoisi = f.showSaveDialog(stage);
+        
+        Stage stage = (Stage) pane_cadre_dessin.getScene().getWindow();
+
+        if (fichierChoisi != null) {
+            controleur.dessin1.sauveSous(fichierChoisi.getAbsolutePath());
+
+            stage.setTitle("Dessin - " + fichierChoisi.getName());
+        }
+    }
+    
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
 }
