@@ -39,7 +39,8 @@ public class Controleur implements Initializable{
 	private Stage stage;
 		
 	@FXML private MenusController menusController;
-	@FXML private DessinController dessinController;
+	@FXML
+	public DessinController dessinController;
 	@FXML private StatutController statutController;
 	@FXML private CouleursController couleursController;
 	
@@ -139,6 +140,6 @@ public class Controleur implements Initializable{
 	}
 	
 	public void setStage(Stage stage) {
-        this.stage = stage;
-    }
+		this.stage = stage;
+	}
 }

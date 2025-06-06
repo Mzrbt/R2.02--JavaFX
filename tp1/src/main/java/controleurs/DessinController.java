@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -96,12 +97,20 @@ public class DessinController implements Initializable{
         if (fichierChoisi != null) {
             controleur.dessin1.sauveSous(fichierChoisi.getAbsolutePath());
 
-            stage.setTitle("Dessin - " + fichierChoisi.getName());
+            stage.setTitle(fichierChoisi.getName());
         }
     }
     
     public void setStage(Stage stage) {
         this.stage = stage;
+        
+        if (stage != null) {
+		    stage.titleProperty().bind(
+		        Bindings.when(controleur.dessin1.estModifieProperty())
+		                .then(Bindings.concat(controleur.dessin1.nomDuFichierProperty(), " *"))
+		                .otherwise(Bindings.concat(controleur.dessin1.nomDuFichierProperty()))
+		    );
+		}
     }
 
 }

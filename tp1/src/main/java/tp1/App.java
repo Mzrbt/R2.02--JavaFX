@@ -44,6 +44,7 @@ public class App extends Application {
         // Récupère le contrôleur
         Controleur controller = loader.getController();
         controller.setStage(stage);
+        controller.dessinController.setStage(stage);
 
         // Crée la scène
         scene = new Scene(root, 640, 480);
