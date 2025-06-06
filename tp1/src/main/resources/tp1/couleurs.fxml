@@ -7,7 +7,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Rectangle?>
 
-<VBox xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" prefHeight="829.0" prefWidth="236.0" style="-fx-background-color: lightgray;" fx:controller="controleurs.CouleursController">
+<VBox fx:id="vbox_principal" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" prefHeight="829.0" prefWidth="236.0" style="-fx-background-color: lightgray;" fx:controller="controleurs.CouleursController">
 	<children>
     	<ColorPicker fx:id="colorpicker_choix_couleur" prefHeight="46.0" prefWidth="241.0" />
         <TilePane fx:id="pane_choix_couleur" prefColumns="2" prefHeight="200.0" prefRows="8" prefWidth="200.0">

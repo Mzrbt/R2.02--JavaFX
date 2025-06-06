@@ -6,8 +6,10 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 public class DessinController implements Initializable{
 
@@ -70,5 +72,10 @@ public class DessinController implements Initializable{
     
     public void setEpaisseur() {
     	canva_cadre_dessin.getGraphicsContext2D().setLineWidth(controleur.epaisseur.get());
+    }
+    
+    public void setCouleur(Color c) {
+    	GraphicsContext gc = canva_cadre_dessin.getGraphicsContext2D();
+        gc.setStroke(c);
     }
 }

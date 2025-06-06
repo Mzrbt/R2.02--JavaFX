@@ -16,6 +16,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.WindowEvent;
 import modele.Dessin;
 import modele.Figure;
@@ -92,6 +93,7 @@ public class Controleur implements Initializable{
 		g.clearRect(0, 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
 		for (Figure f : dessin1.getFigures()) {
 			g.setLineWidth(f.getEpaisseur());
+			g.setStroke(Color.valueOf(f.getCouleur()));
 			for (int i = 1; i < f.getPoints().size(); i++) {
 				double x0 = f.getPoints().get(i-1).getX();
 				double y0 = f.getPoints().get(i-1).getY();
@@ -127,7 +129,8 @@ public class Controleur implements Initializable{
 	    prevY.set(evt.getY());
 	}
 	
-	public void setEpaisseur() {
-		
+	public void setCouleur(Color c) {
+		couleur.set(c);
+		dessinController.setCouleur(c);
 	}
 }
