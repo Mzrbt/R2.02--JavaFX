@@ -1,5 +1,10 @@
-<Pane fx:id="pane_cadre_dessin" prefHeight="835.0" prefWidth="1190.0" BorderPane.alignment="CENTER">
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.canvas.Canvas?>
+
+<Pane xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:id="pane_cadre_dessin" prefHeight="835.0" prefWidth="1190.0" fx:controller="controleurs.DessinController">
 	<children>
-        <Canvas fx:id="canva_cadre_dessin" onMousePressed="#onMousePressed" onMouseDragged="#onMouseDragged" onMouseMoved="#onMouseMoved" height="837.0" width="953.0" />
+        <Canvas fx:id="canva_cadre_dessin" height="837.0" width="953.0" />
     </children>
 </Pane>

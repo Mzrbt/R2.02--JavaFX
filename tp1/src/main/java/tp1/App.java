@@ -26,7 +26,7 @@ public class App extends Application {
     
     private double prevX, prevY;
     
-    public static Controller controller;
+    public static Controleur controller;
     
     @Override
     public void start(Stage stage) throws IOException {
@@ -34,7 +34,7 @@ public class App extends Application {
     	Dessin dessin = new Dessin();
     	dessin.setNomDuFichier("Mon dessin");
     	stage.setTitle(dessin.getNomDuFichier());
-     	controller = new Controller(dessin);
+     	controller = new Controleur();
     	
         scene = new Scene(loadFXML("CadreGribouille"), 640, 480);
         stage.setScene(scene);
@@ -51,7 +51,6 @@ public class App extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        fxmlLoader.setController(controller);
         return fxmlLoader.load();
     }
 

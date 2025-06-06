@@ -2,7 +2,7 @@
 
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="principal" maxHeight="900.0" maxWidth="1190.0" prefHeight="900.0" prefWidth="1190.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="900.0" maxWidth="1190.0" prefHeight="900.0" prefWidth="1190.0" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleurs.Controleur">
    <top>
       <fx:include source="menus.fxml" fx:id="menus"/>
    </top>
@@ -10,7 +10,7 @@
       <fx:include source="statut.fxml" fx:id="statut"/>
    </bottom>
    <center>
-      <fx:include source="dessin.fxml" fx:id="dessin"/>
+      <fx:include source="dessin.fxml" fx:id="dessin" />
    </center>
    <right>
       <fx:include source="couleurs.fxml" fx:id="couleurs"/>

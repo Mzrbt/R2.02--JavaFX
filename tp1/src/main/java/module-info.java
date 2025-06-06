@@ -5,5 +5,7 @@ module tp1 {
 	requires javafx.base;
 
     opens tp1 to javafx.fxml;
+    opens controleurs to javafx.fxml;
     exports tp1;
+    exports controleurs;
 }
