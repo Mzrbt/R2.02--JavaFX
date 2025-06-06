@@ -43,6 +43,7 @@ public class DessinController implements Initializable{
     }
     
     public void trace(double x1, double y1, double x2, double y2) {
+    	canva_cadre_dessin.getGraphicsContext2D().setLineWidth(controleur.epaisseur.get());
     	canva_cadre_dessin.getGraphicsContext2D().strokeLine(x1, y1, x2, y2);
     }
     
@@ -66,5 +67,8 @@ public class DessinController implements Initializable{
             controleur.onMouseDrag(evt);
         }
     }
-
+    
+    public void setEpaisseur() {
+    	canva_cadre_dessin.getGraphicsContext2D().setLineWidth(controleur.epaisseur.get());
+    }
 }

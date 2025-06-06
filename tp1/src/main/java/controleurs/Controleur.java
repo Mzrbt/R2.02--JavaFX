@@ -8,10 +8,12 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.WindowEvent;
@@ -22,7 +24,7 @@ import tp1.Dialogues;
 
 public class Controleur implements Initializable{
 
-	public final static Dessin dessin1 = new Dessin();
+	public final Dessin dessin1 = new Dessin();
 	public Figure figure = null;
 	public final SimpleDoubleProperty prevX = new SimpleDoubleProperty();
     public final SimpleDoubleProperty prevY = new SimpleDoubleProperty();
@@ -31,23 +33,13 @@ public class Controleur implements Initializable{
 	public final SimpleObjectProperty<Color> couleur = new SimpleObjectProperty<Color>(Color.BLACK);
 	
 	private boolean figureEnCoursAjoutee = false;
-	
-	@FXML public MenusController menusController;
-	@FXML public DessinController dessinController;
-	@FXML public StatutController statutController;
-	@FXML public CouleursController couleursController;
-	
-//	@FXML public FXMLLoader menus;
-//	@FXML public FXMLLoader statut;
-//	@FXML public FXMLLoader dessin;
-//	@FXML public FXMLLoader couleurs;
+		
+	@FXML private MenusController menusController;
+	@FXML private DessinController dessinController;
+	@FXML private StatutController statutController;
+	@FXML private CouleursController couleursController;
 	
 	public void initialize(URL location, ResourceBundle resources) {
-		
-//		menusController = menus.getController();
-//		dessinController = dessin.getController();
-//		statutController = statut.getController();
-//		couleursController = couleurs.getController();
 		
 		menusController.setControleur(this);
 		dessinController.setControleur(this);
@@ -58,6 +50,13 @@ public class Controleur implements Initializable{
 	    statutController.val_y.textProperty().bind(prevY.asString("Y: %.2f"));
 	    statutController.epaisseur.textProperty().bind(epaisseur.asString("%d"));
 	    statutController.couleur.textProperty().bind(couleur.asString());
+	    
+	    menusController.Epaisseur.selectedToggleProperty().addListener((obVal, oldVal, newVal) -> {
+			RadioMenuItem choix = (RadioMenuItem) newVal;
+			int val = Integer.parseInt(choix.getText());
+			epaisseur.set(val);
+			statutController.epaisseur.setText(choix.getText());
+		});	    
 	}
 	
 	public static boolean onQuitter() {
@@ -88,9 +87,11 @@ public class Controleur implements Initializable{
 	}
 	
 	public void dessine() {
+		dessinController.setEpaisseur();
 		GraphicsContext g = dessinController.canva_cadre_dessin.getGraphicsContext2D();
 		g.clearRect(0, 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
 		for (Figure f : dessin1.getFigures()) {
+			g.setLineWidth(f.getEpaisseur());
 			for (int i = 1; i < f.getPoints().size(); i++) {
 				double x0 = f.getPoints().get(i-1).getX();
 				double y0 = f.getPoints().get(i-1).getY();
@@ -118,12 +119,15 @@ public class Controleur implements Initializable{
 	        dessin1.addFigure(figure);
 	        figureEnCoursAjoutee = true;
 	    }
-	    System.out.println("trace");
+	    //System.out.println("trace");
 	}
 
 	public void onMouseMove(MouseEvent evt) {
 	    prevX.set(evt.getX());
 	    prevY.set(evt.getY());
 	}
-
+	
+	public void setEpaisseur() {
+		
+	}
 }

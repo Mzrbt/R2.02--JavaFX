@@ -8,6 +8,10 @@
 <?import javafx.scene.control.ToggleGroup?>
 
 <MenuBar xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" prefHeight="27.0" prefWidth="1172.0" fx:controller="controleurs.MenusController">
+	<fx:define>
+    	<ToggleGroup fx:id="Epaisseur"/>
+    	<ToggleGroup fx:id="Forme"/>
+	</fx:define>
 	<menus>
     	<Menu mnemonicParsing="false" text="Dessin">
     	    <items>
@@ -22,9 +26,8 @@
             <items>
             	<Menu mnemonicParsing="false" text="Epaisseur">
                 	<items>
-                    	<RadioMenuItem text="1" toggleGroup="$Epaisseur" />
-						<RadioMenuItem text="2" toggleGroup="$Epaisseur" />
-                        <RadioMenuItem mnemonicParsing="false" text="2" toggleGroup="$Epaisseur" />
+                    	<RadioMenuItem mnemonicParsing="false" text="1" toggleGroup="$Epaisseur" selected="true"/>
+						<RadioMenuItem mnemonicParsing="false" text="2" toggleGroup="$Epaisseur" />
                         <RadioMenuItem mnemonicParsing="false" text="3" toggleGroup="$Epaisseur" />
                         <RadioMenuItem mnemonicParsing="false" text="4" toggleGroup="$Epaisseur" />
                         <RadioMenuItem mnemonicParsing="false" text="5" toggleGroup="$Epaisseur" />
