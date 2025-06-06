@@ -88,13 +88,14 @@ public abstract class Figure {
    * @param line la ligne décrivant la figure
    */
   public static Figure charge(String line) {
-    Scanner scan = new Scanner(line);
-    switch (scan.next()) {
-      case "T" : return new Trace(scan);
-      case "E" : return new Etoile(scan);
-      default: throw new IllegalArgumentException("Type de figure inconnu");
-    }
-  }
+	    Scanner scan = new Scanner(line);
+	    if (scan.next().equals("T")) {
+	        return new Trace(scan);
+	    } else {
+	        throw new IllegalArgumentException("Type de figure inconnu");
+	    }
+	}
+
 
   /** Sauvegarde la figure sous forme d'une ligne de texte.
    * @param out le PrintWriter où la ligne doit être ajoutée

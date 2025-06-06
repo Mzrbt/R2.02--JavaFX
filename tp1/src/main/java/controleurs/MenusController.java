@@ -38,4 +38,10 @@ public class MenusController{
     public void sauvegarde() {
         dessinControleur.sauvegarde();
     }
+    
+    @FXML
+    public void onCharger() {
+        dessinControleur.charge();
+    }
+
 }

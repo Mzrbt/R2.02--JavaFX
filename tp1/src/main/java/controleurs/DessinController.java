@@ -112,5 +112,17 @@ public class DessinController implements Initializable{
 		    );
 		}
     }
+    
+    public void charge() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Charger un dessin");
+
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file != null) {
+            controleur.dessin1.charge(file.getAbsolutePath());
+            controleur.dessine();
+        }
+    }
 
 }
